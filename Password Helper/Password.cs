@@ -117,6 +117,11 @@ namespace Password_Helper
         public object Pattern(string pattern)
         {
             // Task : Pattern {Type:Conut}, | {LettersUpper:5},{lettersLower:8},{number:5},{character:3}...
+            int length = pattern.Length;
+            for (int i = 0; i < length; i++)
+            {
+
+            }
             return new Object();
         }
 
