@@ -10,14 +10,14 @@ namespace Password_Helper
     {
         #region Properties
 
-        private int min_lenght;
+        protected internal int min_lenght;
         public int MinLenght
         {
             get { return min_lenght; }
             set { min_lenght = value; }
         }
 
-        private int max_lenght;
+        protected internal int max_lenght;
         public int MaxLenght
         {
             get { return max_lenght; }
@@ -25,35 +25,35 @@ namespace Password_Helper
         }
 
 
-        private bool number;
+        protected internal bool number;
         public bool IsNumber
         {
             get { return number; }
             set { number = value; }
         }
 
-        private bool letters_uppercase;
+        protected internal bool letters_uppercase;
         public bool LettersUppercase
         {
             get { return letters_uppercase; }
             set { letters_uppercase = value; }
         }
 
-        private bool letters_lowercase;
+        protected internal bool letters_lowercase;
         public bool LettersLowercase
         {
             get { return letters_lowercase; }
             set { letters_lowercase = value; }
         }
 
-        private bool character;
+        protected internal bool character;
         public bool Character
         {
             get { return character; }
             set { character = value; }
         }
 
-        private string[] special;
+        protected internal string[] special;
         public string[] Special
         {
             get { return special; }
@@ -61,7 +61,7 @@ namespace Password_Helper
         }
 
 
-        private int count_special;
+        protected internal int count_special;
         public int CountSpecial
         {
             get { return count_special; }
@@ -69,28 +69,28 @@ namespace Password_Helper
         }
 
 
-        private int count_character;
+        protected internal int count_character;
         public int CountCharacter
         {
             get { return count_character; }
             set { count_character = value; }
         }
 
-        private int count_letters_lowercase;
+        protected internal int count_letters_lowercase;
         public int CountLettersLowercase
         {
             get { return count_letters_lowercase; }
             set { count_letters_lowercase = value; }
         }
 
-        private int count_letters_uppercase;
+        protected internal int count_letters_uppercase;
         public int CountLettersUppercase
         {
             get { return count_letters_uppercase; }
             set { count_letters_uppercase = value; }
         }
 
-        private int count_number;
+        protected internal int count_number;
         public int CountNumber
         {
             get { return count_number; }
