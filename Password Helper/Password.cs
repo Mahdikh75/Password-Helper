@@ -128,7 +128,7 @@ namespace Password_Helper
         public object Get()
         {
             // Task : Get Password for Properties
-            return new Object();
+            return 150;
         }
 
         #endregion
