@@ -8,6 +8,14 @@ namespace Password_Helper
 {
     public class Password
     {
+        #region Const
+
+        private readonly string[] Letter_Up = { "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "A", "S", "D", "F", "G", "H", "J", "K", "L", "Z", "X", "C", "V", "B", "N", "M" };
+        private readonly string[] Letter_Low = { "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m" };
+        private readonly string[] Chars = { "*", "#", "@", "$", "%", "!", ".", "~" };
+
+        #endregion
+
         #region Properties
 
         protected internal int min_lenght;
@@ -114,15 +122,54 @@ namespace Password_Helper
 
         #region Methods
 
-        public object Pattern(string pattern)
+        public Object Pattern(string pattern)
         {
-            // Task : Pattern {Type:Conut}, | {LettersUpper:5},{lettersLower:8},{number:5},{character:3}...
-            int length = pattern.Length;
-            for (int i = 0; i < length; i++)
-            {
+            // Task : Pattern Type:Conut, ... | LettersUpper:5,LettersLower:8,Number:5,Character:3 
+            StringBuilder strb = new StringBuilder();
 
+            foreach (var item in pattern.Split(","))
+            {
+                var selector = item.Split(":");
+                if (selector.Length == 2)
+                {
+                    switch (selector[0].ToLower())
+                    {
+                        case "lettersupper":
+                            for (int i = 0; i < int.Parse(selector[1].ToString()); i++)
+                            {
+                                strb.Append(Letter_Up[(new Random().Next(0, 25))]);
+                            }
+                            break;
+                        case "letterslower":
+                            for (int i = 0; i < int.Parse(selector[1].ToString()); i++)
+                            {
+                                strb.Append(Letter_Low[(new Random().Next(0, 25))]);
+                            }
+                            break;
+                        case "number":
+                            string max = string.Empty;
+                            string min = "1";
+                            for (int i = 0; i < int.Parse(selector[1].ToString()); i++)
+                            {
+                                max += "9";
+                                if (i != 0)
+                                    min += "0";
+                            }
+                            strb.Append(new Random().Next(int.Parse(min), int.Parse(max)));
+                            break;
+                        case "character":
+                            for (int i = 0; i < int.Parse(selector[1].ToString()); i++)
+                            {
+                                strb.Append(Chars[(new Random().Next(0, 7))]);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
-            return new Object();
+
+            return strb.ToString();
         }
 
         public object Get()
