@@ -12,7 +12,7 @@ namespace Password_Helper
 
         private readonly string[] Letter_Up = { "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "A", "S", "D", "F", "G", "H", "J", "K", "L", "Z", "X", "C", "V", "B", "N", "M" };
         private readonly string[] Letter_Low = { "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m" };
-        private readonly string[] Chars = { "*", "#", "@", "$", "%", "!", ".", "~" };
+        private readonly string[] Chars = { "*", "#", "@", "$", "%", "!", "~" };
 
         #endregion
 
@@ -68,15 +68,6 @@ namespace Password_Helper
             set { special = value; }
         }
 
-
-        protected internal int count_special;
-        public int CountSpecial
-        {
-            get { return count_special; }
-            set { count_special = value; }
-        }
-
-
         protected internal int count_character;
         public int CountCharacter
         {
@@ -122,9 +113,9 @@ namespace Password_Helper
 
         #region Methods
 
-        public Object Pattern(string pattern)
+        public string Pattern(string pattern)
         {
-            // Task : Pattern Type:Conut, ... | LettersUpper:5,LettersLower:8,Number:5,Character:3 
+            // Type:Conut, ... | LettersUpper:5,LettersLower:8,Number:5,Character:3 
             StringBuilder strb = new StringBuilder();
 
             foreach (var item in pattern.Split(","))
@@ -160,7 +151,7 @@ namespace Password_Helper
                         case "character":
                             for (int i = 0; i < int.Parse(selector[1].ToString()); i++)
                             {
-                                strb.Append(Chars[(new Random().Next(0, 7))]);
+                                strb.Append(Chars[(new Random().Next(0, 6))]);
                             }
                             break;
                         default:
@@ -172,10 +163,29 @@ namespace Password_Helper
             return strb.ToString();
         }
 
-        public object Get()
+        public string Get()
         {
             // Task : Get Password for Properties
-            return 150;
+            StringBuilder strb = new StringBuilder();
+
+            int count = CountNumber + CountCharacter + CountLettersLowercase + CountLettersUppercase + Special.Length;
+            if (MaxLenght == count)
+            {
+                Object[] data = new object[count];
+
+                // Cretae to Code
+
+
+                foreach (var item in data)
+                {
+                    yield return item;
+                }
+            }
+            else
+            {
+                throw new Exception("Max Lenght != Count Attrbuite");
+            }
+            //return null;
         }
 
         #endregion

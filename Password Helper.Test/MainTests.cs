@@ -24,13 +24,7 @@ namespace Password_Helper.Test
         }
 
         [Test]
-        public void TestAll()
-        {
-
-        }
-
-        [Test]
-        [Repeat(100)]
+        [Repeat(50)]
         public void TestPattern()
         {
             Password ps = new Password();
@@ -39,8 +33,15 @@ namespace Password_Helper.Test
             //var run = ps.Pattern("LettersUpper:5,lettersLower:8,number:5,character:3");
             //Assert.That(data, Is.EqualTo(run));
 
-            var ptn = ps.Pattern("number:2,lettersLower:2,LettersUpper:3,character:3").ToString();
+            var ptn = ps.Pattern("number:2,lettersLower:2,LettersUpper:4,number:2,character:1").ToString();
             Console.WriteLine(ptn);
+        }
+
+        [Test]
+        [Repeat(50)]
+        public void TestGet()
+        {
+
         }
 
     }
