@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PasswordGenerator;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,97 +19,49 @@ namespace Password_Helper
 
         #region Properties
 
-        protected internal int min_lenght;
-        public int MinLenght
-        {
-            get { return min_lenght; }
-            set { min_lenght = value; }
-        }
-
-        protected internal int max_lenght;
-        public int MaxLenght
-        {
-            get { return max_lenght; }
-            set { max_lenght = value; }
-        }
-
-
-        protected internal bool number;
+        private bool number;
         public bool IsNumber
         {
             get { return number; }
             set { number = value; }
         }
 
-        protected internal bool letters_uppercase;
+        private bool letters_uppercase;
         public bool LettersUppercase
         {
             get { return letters_uppercase; }
             set { letters_uppercase = value; }
         }
 
-        protected internal bool letters_lowercase;
+        private bool letters_lowercase;
         public bool LettersLowercase
         {
             get { return letters_lowercase; }
             set { letters_lowercase = value; }
         }
 
-        protected internal bool character;
+        private bool character;
         public bool Character
         {
             get { return character; }
             set { character = value; }
         }
 
-        protected internal string[] special;
-        public string[] Special
+        private string special;
+        public string Special
         {
             get { return special; }
             set { special = value; }
         }
 
-        protected internal int count_character;
-        public int CountCharacter
-        {
-            get { return count_character; }
-            set { count_character = value; }
-        }
-
-        protected internal int count_letters_lowercase;
-        public int CountLettersLowercase
-        {
-            get { return count_letters_lowercase; }
-            set { count_letters_lowercase = value; }
-        }
-
-        protected internal int count_letters_uppercase;
-        public int CountLettersUppercase
-        {
-            get { return count_letters_uppercase; }
-            set { count_letters_uppercase = value; }
-        }
-
-        protected internal int count_number;
-        public int CountNumber
-        {
-            get { return count_number; }
-            set { count_number = value; }
-        }
-        #endregion
-
-        #region Ctr
+        private int Lenght;
         public Password()
         {
-            min_lenght = 4;
-            max_lenght = 12;
         }
-        public Password(int min, int max)
+        public Password(int lenght)
         {
-            min_lenght = min;
-            max_lenght = max;
+            Lenght = lenght;
         }
-
         #endregion
 
         #region Methods
@@ -165,27 +118,24 @@ namespace Password_Helper
 
         public string Get()
         {
-            // Task : Get Password for Properties
-            StringBuilder strb = new StringBuilder();
+            PasswordGenerator.Password ps = new PasswordGenerator.Password(Lenght);
 
-            int count = CountNumber + CountCharacter + CountLettersLowercase + CountLettersUppercase + Special.Length;
-            if (MaxLenght == count)
-            {
-                Object[] data = new object[count];
+            if (IsNumber)
+                ps.IncludeNumeric();
 
-                // Cretae to Code
+            if (LettersUppercase)
+                ps.IncludeUppercase();
 
+            if (LettersLowercase)
+                ps.IncludeLowercase();
 
-                foreach (var item in data)
-                {
-                    yield return item;
-                }
-            }
-            else
-            {
-                throw new Exception("Max Lenght != Count Attrbuite");
-            }
-            //return null;
+            if (Character)
+                ps.IncludeSpecial();
+
+            if (Special.Length > 0)
+                ps.IncludeSpecial(Special);
+
+            return ps.Next();
         }
 
         #endregion
